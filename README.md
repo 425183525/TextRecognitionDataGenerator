@@ -10,13 +10,14 @@ Generating text image samples to train an OCR software. Now supporting non-latin
 I use Archlinux so I cannot tell if it works on Windows yet.
 
 ```
-Python 3.X
+create image datesets:Python 3.X
 OpenCV 3.2 (It probably works with 2.4)
 Pillow
 Numpy
 Requests
 BeautifulSoup
 tqdm
+create lmdb: Python 2.X
 ```
 
  You can simply use `pip install -r requirements.txt` too.
