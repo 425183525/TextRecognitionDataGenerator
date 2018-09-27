@@ -31,7 +31,7 @@ create lmdb: Python 2.X
 - You can "fake" handwriting using `-hw`
 
 ## How does it work?
-`python run.py -w 5 -f 64`
+`python run.py -w 5 -f 32`
 
 You get 1000 randomly generated images with random text on them like:
 
