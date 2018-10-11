@@ -103,6 +103,11 @@ Simplified:
 
 ![28](samples/28.jpg "1")
 
+## generate padding text data
+python padding_data_gen
+this will create picture which is padding
+
+
 ## Can I add my own font?
 
 Yes, the script picks a font at random from the *fonts* directory. 
