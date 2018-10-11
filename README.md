@@ -105,7 +105,7 @@ Simplified:
 
 ## generate padding text data
 python padding_data_gen
-this will create picture which is padding
+ will create picture which is padding
 
 
 ## Can I add my own font?
