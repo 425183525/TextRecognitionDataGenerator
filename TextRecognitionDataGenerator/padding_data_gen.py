@@ -1,3 +1,7 @@
+"""
+     create pictures look like your real scence
+     this project mainly use to some bakground ,some text
+"""
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import random
 import glob
@@ -128,6 +132,7 @@ def is_chinese(self, uchar):
 if __name__ == '__main__':
     info_str = []
 
+    #  newwords.txt is a char datasets contain amounts of chars sequnences
     with open('/home/rice/PycharmProjects/TextRecognitionDataGenerator/newwords.txt', 'r', encoding="utf8") as f:
         lines = [l.strip()[0:100] for l in f.readlines()]
         # for l in lines:
