@@ -27,6 +27,7 @@ def random_word_color():
     return tuple(font_color)
 
 
+
 # 生成一张图片
 def create_an_image(bground_path, width, height):
     bground_list = os.listdir(bground_path)
@@ -69,8 +70,8 @@ def random_x_y(bground_size, font_size):
 
 
 def random_font_size():
-    font_size = random.randint(24, 27)
-
+    #font_size = random.randint(24, 27)
+    font_size = random.randint(12, 27)
     return font_size
 
 
@@ -112,14 +113,22 @@ def padding_data_gen(save_path, num, file, info_str):
     f1 = open(file, 'a')
     f1.write(str(num) + " " + str(random_word) + '\n')
 
-
     print(num)
+
+
+def is_chinese(self, uchar):
+    """判断一个unicode是否是汉字"""
+    alnum = np.array([ch.isalnum() for ch in uchar])
+    if not alnum.all():
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
     info_str = []
 
-    with open('/home/rice/PycharmProjects/TextRecognitionDataGenerator/words.txt', 'r', encoding="utf8") as f:
+    with open('/home/rice/PycharmProjects/TextRecognitionDataGenerator/newwords.txt', 'r', encoding="utf8") as f:
         lines = [l.strip()[0:100] for l in f.readlines()]
         # for l in lines:
         #     print(l)
