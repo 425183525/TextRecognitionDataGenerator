@@ -90,7 +90,7 @@ def padding_data_gen(save_path, num, file, info_str):
     # 随机选取10个字符
     random_word = sto_choice_from_info_str(info_str)
     # 生成一张背景图片，已经剪裁好，宽高为32*280
-    raw_image = create_an_image('./picture/', 280, 32)
+    raw_image = create_an_image('./pictures/', 280, 32)
 
     # 随机选取字体大小
     font_size = random_font_size()
