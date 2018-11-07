@@ -9,6 +9,16 @@ import numpy as np
 import os
 import cv2
 
+widths = [
+  (126,  1), (159,  0), (687,   1), (710,  0), (711,  1),
+  (727,  0), (733,  1), (879,   0), (1154, 1), (1161, 0),
+  (4347,  1), (4447,  2), (7467,  1), (7521, 0), (8369, 1),
+  (8426,  0), (9000,  1), (9002,  2), (11021, 1), (12350, 2),
+  (12351, 1), (12438, 2), (12442,  0), (19893, 2), (19967, 1),
+  (55203, 2), (63743, 1), (64106,  2), (65039, 1), (65059, 0),
+  (65131, 2), (65279, 1), (65376,  2), (65500, 1), (65510, 2),
+  (120831, 1), (262141, 2), (1114109, 1),
+]
 
 # 从文字库中随机选择n个字符
 def sto_choice_from_info_str(info_str):
@@ -90,7 +100,7 @@ def padding_data_gen(save_path, num, file, info_str):
     # 随机选取10个字符
     random_word = sto_choice_from_info_str(info_str)
     # 生成一张背景图片，已经剪裁好，宽高为32*280
-    raw_image = create_an_image('./pictures/', 280, 32)
+    raw_image = create_an_image('./background/', 280, 32)
 
     # 随机选取字体大小
     font_size = random_font_size()
@@ -120,13 +130,15 @@ def padding_data_gen(save_path, num, file, info_str):
     print(num)
 
 
-def is_chinese(self, uchar):
-    """判断一个unicode是否是汉字"""
-    alnum = np.array([ch.isalnum() for ch in uchar])
-    if not alnum.all():
-        return True
-    else:
-        return False
+def get_width(o):
+    """Return the screen column width for unicode ordinal o."""
+    global widths
+    if o == 0xe or o == 0xf:
+      return 0
+    for num, wid in widths:
+      if o <= num:
+        return (wid/2)*1.6
+    return 1
 
 
 if __name__ == '__main__':
@@ -144,18 +156,46 @@ if __name__ == '__main__':
             strx = ''
             chars = lines[i]
             length = len(chars)
+            # print(chars)
+
             if length < 5:
                 continue
             if (length > 4) & (length < 10):
                 info_str.append(chars)
                 continue
-            for i in range(0, length - 10):
-                strx = ''
-                strx += chars[i:10 + i]
 
+
+            count = 0
+            j = 0.0
+            while (j < 16.0 )| (j == 16.0):
+
+                print(length-1-count)
+                tailchar = chars[length-1-count]
+                j += get_width(ord(tailchar))
+                if j > 16.0:
+                    break;
+                count += 1
+
+            for i in range(0, length - count-1):
+                strx = ''
+                tail = ""
+                k = 0
+                c = 0.0
+                while (c < 16.0 )| (c == 16.0):
+                    print("i+k",i+k)
+                    tchar = chars[i+k]
+
+                    c += get_width(ord(tchar))
+                    if c > 16.0:
+                        break;
+                    tail += tchar
+                    k += 1
+
+                #strx += chars[i:c + i]
+                strx += tail
                 info_str.append(strx)
             # print(str)
-                info_str.append(chars[length - 10:length])
+            info_str.append(chars[length - count-1:length-1])
     print(info_str)
     for i in range(0,1000000):
         padding_data_gen('/run/media/rice/DATA/test_text/data/', i, '/run/media/rice/DATA/test_text/labels.txt', info_str)
